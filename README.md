@@ -87,6 +87,51 @@
    	
 	```
 
+- Configure your application to offer the resource /blueprints, so that when a GET request is made, return in JSON format - all the drawings. For this:
+	- Modify the BlueprintAPIController class taking into account the following example of a REST controller 	made with SpringMVC/SpringBoot
+	
+	Se introdujeron las anotaciones @RestController el cual sirve para simplificar la creación de servicios 	web RESTful y la anotación @RequestMapping para asignar solicitudes web a los métodos de Spring 		Controller. 
+	
+	- Have the BlueprintServices type bean injected into this class (which, in turn, will be injected with 		its persistence and point filtering dependencies).
+	
+	Para realizar inyección de dependencias utilizamos @Autowired, esta anotación permite al Spring resolver 	 e inyectar beans de colaboración en su bean. 
+	
+	
+	
+	
+``` java 
 
+	@RestController
+	@RequestMapping(value = "/blueprints")
+	public class BlueprintAPIController {
 
+	    @Autowired
+	    BlueprintsServices bps;
 
+	    @RequestMapping(method = RequestMethod.GET)
+	    public ResponseEntity<?> manejadorGetRecursoAll() {
+		try {
+		    Set<Blueprint> blueprints = bps.getAllBlueprints();
+		    return new ResponseEntity<>(blueprints,HttpStatus.ACCEPTED);
+		} catch (BlueprintNotFoundException ex) {
+		    Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+		    return new ResponseEntity<>("Error bla bla bla",HttpStatus.NOT_FOUND);
+		}
+	    }
+	    @RequestMapping(method = RequestMethod.GET , path = "{author}")
+	    public ResponseEntity<?> manejadorGetRecursoAuthor(@PathVariable("author") String author) {
+		ResponseEntity ans;
+		try {
+		    Set<Blueprint> blueprints = bps.getBlueprintsByAuthor(author);
+		    if(blueprints.size()==0){
+			ans = new ResponseEntity<>("Error 404",HttpStatus.NOT_FOUND);
+		    }else{
+			ans = new ResponseEntity<>(blueprints,HttpStatus.ACCEPTED);
+		    }        
+		} catch (BlueprintNotFoundException ex) {
+		    Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+		    ans = new ResponseEntity<>("Error bla bla bla",HttpStatus.NOT_FOUND.NOT_FOUND);
+		}
+		return ans;
+	    }
+```
