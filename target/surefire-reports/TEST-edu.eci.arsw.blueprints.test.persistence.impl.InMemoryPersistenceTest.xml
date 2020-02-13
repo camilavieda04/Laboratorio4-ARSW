@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="2.577" tests="6" errors="0" skipped="0" failures="0">
+<testsuite name="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="2.679" tests="6" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_201\jre\bin"/>
     <property name="java.vm.version" value="25.201-b09"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="C:\Users\juan.navarro\Downloads\Blueprint Management 1"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\Users\juan.navarro\Downloads\Laboratorio4-ARSW"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=";"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -16,7 +16,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value=""/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="C:\Users\juan.navarro\Downloads\Blueprint Management 1"/>
+    <property name="user.dir" value="C:\Users\juan.navarro\Downloads\Laboratorio4-ARSW"/>
     <property name="java.runtime.version" value="1.8.0_201-b09"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="C:\Program Files\Java\jdk1.8.0_201\jre\lib\endorsed"/>
@@ -64,10 +64,10 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="deberiaDarTodosLosBlueprints" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="1.655"/>
-  <testcase name="deberiaDarElBluePrintSegunAutorYNombre" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="0.329"/>
+  <testcase name="deberiaDarTodosLosBlueprints" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="1.659"/>
+  <testcase name="deberiaDarElBluePrintSegunAutorYNombre" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="0.363"/>
   <testcase name="saveExistingBpTest" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="0"/>
   <testcase name="saveNewAndLoadTest" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="0"/>
-  <testcase name="deberiFiltrarSubSampling" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="0.296"/>
-  <testcase name="deberiaDarTodosLosBlueprintDelAutor" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="0.297"/>
+  <testcase name="deberiFiltrarSubSampling" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="0.312"/>
+  <testcase name="deberiaDarTodosLosBlueprintDelAutor" classname="edu.eci.arsw.blueprints.test.persistence.impl.InMemoryPersistenceTest" time="0.345"/>
 </testsuite>
