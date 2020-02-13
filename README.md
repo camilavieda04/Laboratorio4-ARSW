@@ -3,9 +3,9 @@
 ## PART I 
 - Integrate to the base project supplied the Beans developed in the previous exercise. Just copy the classes, NOT the configuration files. Rectify that the dependency injection scheme is correctly configured with the `@Service` and `@Autowired` annotations.
 
-Realizamos la integración de nuestro laboratorio No. 3 con el laboratorio No. 4, para esto tuvimos que realizar algunos cambios en el POM. 
+	Realizamos la integración de nuestro laboratorio No. 3 con el laboratorio No. 4, para esto tuvimos que realizar algunos cambios 	en el POM. 
 
-	``` java
+``` java
 	<?xml version="1.0" encoding="UTF-8"?>
 	<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -57,4 +57,4 @@ Realizamos la integración de nuestro laboratorio No. 3 con el laboratorio No. 4
 			</plugins>
 		</build>
 	</project>
-	```
+```
