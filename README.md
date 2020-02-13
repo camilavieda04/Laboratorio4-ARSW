@@ -135,3 +135,13 @@
 		return ans;
 	    }
 ```
+
+- Verify the operation of the application by launching the application with maven. And then sending a GET request to: http://localhost:8080/blueprints. Rectify that, in response, a JSON object is obtained with a list containing the detail of the drawings provided by default, and that the corresponding point filtering has been applied.
+
+	![Capture1](https://user-images.githubusercontent.com/44879884/74444976-a4a0d300-4e43-11ea-838d-f5b8e4c30d77.PNG)
+
+- Modify the controller so that it now accepts GET requests to the resource /blueprints/{author}, which returns using a JSON representation all the plans made by the author whose name is {author}. If there is no such author, you must respond with the HTTP error code 404. For this, review in the Spring documentation, section 22.3.2, the use of @PathVariable. Again, verify that when making a GET request -for example- to the resource http://localhost:8080/blueprints/juan, the set of planes associated with the author 'juan' is obtained in JSON format (adjust this to the names of author used in point 2).
+
+	![Capture2](https://user-images.githubusercontent.com/44879884/74444968-a4083c80-4e43-11ea-9882-9a9288ca8d2a.PNG)	
+	![Capture3](https://user-images.githubusercontent.com/44879884/74444972-a4083c80-4e43-11ea-82aa-c502c2bfe6e9.PNG)
+	![Capture4](https://user-images.githubusercontent.com/44879884/74444975-a4a0d300-4e43-11ea-9d12-df45e717bfb1.PNG)
