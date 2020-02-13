@@ -137,11 +137,64 @@
 ```
 
 - Verify the operation of the application by launching the application with maven. And then sending a GET request to: http://localhost:8080/blueprints. Rectify that, in response, a JSON object is obtained with a list containing the detail of the drawings provided by default, and that the corresponding point filtering has been applied.
-
+	
+	Se creo el metodo manejadorGetRecursoAll() que realiza una petición sobre todos los blueprints.
+	
+	``` java 
+	    @RequestMapping(method = RequestMethod.GET)
+	    public ResponseEntity<?> manejadorGetRecursoAll() {
+		try {
+		    Set<Blueprint> blueprints = bps.getAllBlueprints();
+		    return new ResponseEntity<>(blueprints,HttpStatus.ACCEPTED);
+		} catch (BlueprintNotFoundException ex) {
+		    Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+		    return new ResponseEntity<>("Error bla bla bla",HttpStatus.NOT_FOUND);
+		}
+	    }	
+	```
+	
 	![Capture1](https://user-images.githubusercontent.com/44879884/74444976-a4a0d300-4e43-11ea-838d-f5b8e4c30d77.PNG)
 
 - Modify the controller so that it now accepts GET requests to the resource /blueprints/{author}, which returns using a JSON representation all the plans made by the author whose name is {author}. If there is no such author, you must respond with the HTTP error code 404. For this, review in the Spring documentation, section 22.3.2, the use of @PathVariable. Again, verify that when making a GET request -for example- to the resource http://localhost:8080/blueprints/juan, the set of planes associated with the author 'juan' is obtained in JSON format (adjust this to the names of author used in point 2).
 
+	Se creo el metodo manejadorGetRecursoAuthor() que realiza una petición sobre todos los blueprints de un autor específico.
+	
+	``` java 
+	    @RequestMapping(method = RequestMethod.GET , path = "{author}")
+	    public ResponseEntity<?> manejadorGetRecursoAuthor(@PathVariable("author") String author) {
+		ResponseEntity ans;
+		try {
+		    Set<Blueprint> blueprints = bps.getBlueprintsByAuthor(author);
+		    ans = new ResponseEntity<>(blueprints,HttpStatus.ACCEPTED);      
+		} catch (BlueprintNotFoundException ex) {
+		    Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+		    ans = new ResponseEntity<>("Error 404",HttpStatus.NOT_FOUND.NOT_FOUND);
+		}
+		return ans;
+	    }
+	```
+	
 	![Capture2](https://user-images.githubusercontent.com/44879884/74444968-a4083c80-4e43-11ea-9882-9a9288ca8d2a.PNG)	
 	![Capture3](https://user-images.githubusercontent.com/44879884/74444972-a4083c80-4e43-11ea-82aa-c502c2bfe6e9.PNG)
 	![Capture4](https://user-images.githubusercontent.com/44879884/74444975-a4a0d300-4e43-11ea-9d12-df45e717bfb1.PNG)
+	
+- Modify the controller so that it now accepts GET requests to the resource/blueprints/{author}/{bpname}, which returns using a JSON representation only ONE plane, in this case the one made by {author} and whose name is {bpname}. Again, if there is no such author, you must respond with the HTTP 404 error code.
+	
+	Se creo el metodo manejadorGetRecursoAuthorAndBpName() que realiza una petición sobre un blueprint específico de un autor.
+	
+	``` java 
+	    @RequestMapping(method = RequestMethod.GET , path = "{author}/{name}")
+	    public ResponseEntity<?> manejadorGetRecursoAuthorAndBpName(@PathVariable("author") String author, @PathVariable("name") String bpname) {
+		ResponseEntity ans;
+		try {
+		    Blueprint bp = bps.getBlueprint(author, bpname);
+		    ans = new ResponseEntity<>(bp,HttpStatus.ACCEPTED);        
+		} catch (BlueprintNotFoundException ex) {
+		    Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+		    ans = new ResponseEntity<>("Error bla bla bla",HttpStatus.NOT_FOUND.NOT_FOUND);
+		}
+		return ans;
+	    }
+	```
+	
+	![Capture5](https://user-images.githubusercontent.com/44879884/74445781-f26a0b00-4e44-11ea-857d-f8f634921ce6.PNG)
