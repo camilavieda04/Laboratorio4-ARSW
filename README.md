@@ -1,5 +1,10 @@
 # Blueprint Management 2
 
+# Integrantes
+- Sarah Camila Vieda
+- Juan David Navarro
+- Jimmy Armando Chirivi 
+
 ## PART I 
 - Integrate to the base project supplied the Beans developed in the previous exercise. Just copy the classes, NOT the configuration files. Rectify that the dependency injection scheme is correctly configured with the `@Service` and `@Autowired` annotations.
 
