@@ -58,3 +58,30 @@
 		</build>
 	</project>
 ```
+
+- Modify the persistence bean InMemoryBlueprintPersistence so that by default it is initialized with at least three other planes, and with two associated with the same author.
+
+	Creamos en el constructor de nuestra clase InMemoryBlueprintPersistence 4 planos en donde 3 de ellos estan asociados al mismo 		autor "sarah".
+	
+	``` java
+	public InMemoryBlueprintPersistence() {
+        //load stub data
+        Point[] pts=new Point[]{new Point(140, 140),new Point(115, 123)};
+        Blueprint bp=new Blueprint("sarah", "thearsw",pts);
+        blueprints.put(new Tuple<>(bp.getAuthor(),bp.getName()), bp);
+        Point[] pts1=new Point[]{new Point(100, 100),new Point(123, 215)};
+        Blueprint bp1=new Blueprint("sarah", "thespti",pts1);
+        blueprints.put(new Tuple<>(bp1.getAuthor(),bp1.getName()), bp1);
+        Point[] pts2=new Point[]{new Point(100, 120),new Point(20, 32)};
+        Blueprint bp2=new Blueprint("sarah", "themkt4",pts2);
+        blueprints.put(new Tuple<>(bp2.getAuthor(),bp2.getName()), bp2);
+        Point[] pts3=new Point[]{new Point(140, 140),new Point(120, 23)};
+        Blueprint bp3=new Blueprint("jimmy", "thearep",pts3);
+        blueprints.put(new Tuple<>(bp3.getAuthor(),bp3.getName()), bp3);
+    	}
+   	
+	```
+
+
+
+
