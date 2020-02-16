@@ -8,15 +8,14 @@ package edu.eci.arsw.blueprints.controllers;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.services.BlueprintsServices;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import static org.springframework.http.RequestEntity.method;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,32 +30,60 @@ public class BlueprintAPIController {
 
     @Autowired
     BlueprintsServices bps;
-    
+
     @RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<?> manejadorGetRecursoAll() {
+    public ResponseEntity<Set<Blueprint>> manejadorGetRecursoAll() {
+        ResponseEntity ans;
         try {
             Set<Blueprint> blueprints = bps.getAllBlueprints();
-            return new ResponseEntity<>(blueprints,HttpStatus.ACCEPTED);
+            ans = new ResponseEntity<>(blueprints, HttpStatus.ACCEPTED);
         } catch (BlueprintNotFoundException ex) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
-            return new ResponseEntity<>("Error bla bla bla",HttpStatus.NOT_FOUND);
+            ans = new ResponseEntity<>("Error bla bla bla", HttpStatus.NOT_FOUND);
         }
+        return ans;
     }
-    @RequestMapping(method = RequestMethod.GET , path = "{author}")
-    public ResponseEntity<?> manejadorGetRecursoAuthor(@PathVariable("author") String author) {
+
+    @RequestMapping(method = RequestMethod.GET, path = "{author}")
+    public ResponseEntity<Set<Blueprint>> manejadorGetRecursoAuthor(@PathVariable("author") String author) {
         ResponseEntity ans;
         try {
             Set<Blueprint> blueprints = bps.getBlueprintsByAuthor(author);
-            if(blueprints.size()==0){
-                ans = new ResponseEntity<>("Error 404",HttpStatus.NOT_FOUND);
-            }else{
-                ans = new ResponseEntity<>(blueprints,HttpStatus.ACCEPTED);
-            }        
+            if (blueprints.isEmpty()) {
+                ans = new ResponseEntity<>("Error 404", HttpStatus.NOT_FOUND);
+            } else {
+                ans = new ResponseEntity<>(blueprints, HttpStatus.ACCEPTED);
+            }
         } catch (BlueprintNotFoundException ex) {
             Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
-            ans = new ResponseEntity<>("Error bla bla bla",HttpStatus.NOT_FOUND.NOT_FOUND);
+            ans = new ResponseEntity<>("Error 404", HttpStatus.NOT_FOUND.NOT_FOUND);
         }
         return ans;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path = "{author}/{name}")
+    public ResponseEntity<Blueprint> manejadorGetRecursoAuthorAndBpName(@PathVariable("author") String author, @PathVariable("name") String bpname) {
+        ResponseEntity ans;
+        try {
+            Blueprint bp = bps.getBlueprint(author, bpname);
+            ans = new ResponseEntity<>(bp, HttpStatus.ACCEPTED);
+        } catch (BlueprintNotFoundException ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+            ans = new ResponseEntity<>("Error 404", HttpStatus.NOT_FOUND.NOT_FOUND);
+        }
+        return ans;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<Blueprint> newBlueprint(@RequestBody Blueprint bp) {
+        bps.addNewBlueprint(bp);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+    
+    @RequestMapping(method = RequestMethod.PUT, path = "{author}/{name}")
+    public ResponseEntity<?> newBlueprint(@PathVariable("author") String author, @PathVariable("name") String bpname) {
+        
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }
