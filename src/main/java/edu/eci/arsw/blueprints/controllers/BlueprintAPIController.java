@@ -75,14 +75,14 @@ public class BlueprintAPIController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Blueprint> newBlueprint(@RequestBody Blueprint bp) {
+    public ResponseEntity<Blueprint> manejadorPostAgregaUnNuevoBlueprint(@RequestBody Blueprint bp) {
         bps.addNewBlueprint(bp);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     
     @RequestMapping(method = RequestMethod.PUT, path = "{author}/{name}")
-    public ResponseEntity<?> newBlueprint(@PathVariable("author") String author, @PathVariable("name") String bpname) {
-        
+    public ResponseEntity<Blueprint> manejadorPutModificaUnBluePrint(@RequestBody Blueprint bp,@PathVariable("author") String author, @PathVariable("name") String bpname) {
+        bps.changeBluerprint(bp, author, bpname);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

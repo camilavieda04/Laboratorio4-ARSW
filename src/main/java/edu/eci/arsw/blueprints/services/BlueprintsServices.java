@@ -37,6 +37,10 @@ public class BlueprintsServices {
             Logger.getLogger(BlueprintsServices.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void changeBluerprint(Blueprint bp, String author, String name){
+
+    }
 
     public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
         Set<Blueprint> filter = new HashSet<>();
