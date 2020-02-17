@@ -237,4 +237,6 @@
 
 - Add support to the PUT verb for resources of the form /blueprints/{author}/{bpname}, so that it is possible to update a specific plane.
 
+	![Capture2](https://user-images.githubusercontent.com/44879884/74684996-3d648500-519b-11ea-8189-625f0f2dab31.PNG)
+
 ## PART III
