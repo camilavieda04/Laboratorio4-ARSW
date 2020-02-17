@@ -138,6 +138,10 @@
 
 - Verify the operation of the application by launching the application with maven. And then sending a GET request to: http://localhost:8080/blueprints. Rectify that, in response, a JSON object is obtained with a list containing the detail of the drawings provided by default, and that the corresponding point filtering has been applied.
 	
+	Para correr nuestra aplicación realizamos lo siguiente:
+	1. mvn package
+	2. mvn spring-boot:run
+	
 	Se creo el metodo manejadorGetRecursoAll() que realiza una petición sobre todos los blueprints.
 	
 	``` java 
@@ -215,9 +219,21 @@
 
 - To test that the planes resource correctly accepts and interprets POST requests, use the Unix curl command. This command has as a parameter the type of content handled (in this case JSON), and the message body that will go with the request, which in this case must be a JSON document equivalent to the Client class (where instead of {JSON Object}, a JSON object corresponding to a new order will be used.
 
+	A continuación utilizaremos el comando curl -i -X POST y agregaremos un documento JSON el cual contiene un nuevo Blueprint llamado "themkt4.0" con su autor "Juan" y sus respectivos puntos. 
+	
+	``` java
+	curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints -d "{"""author""":"""juan""","""points""":[{"""x""":10,"""y""":10},{"""x""":15,"""y""":0}],"""name""":"""themkt4.0"""}"
+	```
 - With the above, register a new plane (to 'design' a JSON object, you can use this tool). It can be based on the JSON format shown in the browser when consulting an order with the GET method.
-
+	
+	Al ejecutar el comando anterior se crea un nuevo blueprint con los atributos que se le dieron anteriormente y al realizar la consulta de todos los blueprints, nos da como resultado todos los anteriores junto con el nuevo que se creo de MKT4.0.
+	
+	![add](https://user-images.githubusercontent.com/48154086/74679720-a264ae80-518c-11ea-9429-6c6de29e8e88.PNG)
+	
 - Taking into account the author and name of the registered plan, verify that it can be obtained through a GET request to the corresponding resource /blueprints/{author}/{bpname}.
+
+	![add 1](https://user-images.githubusercontent.com/48154086/74679864-fc657400-518c-11ea-9a25-7760a669c48d.PNG)
+	
 
 - Add support to the PUT verb for resources of the form /blueprints/{author}/{bpname}, so that it is possible to update a specific plane.
 
