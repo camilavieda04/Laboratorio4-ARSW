@@ -222,7 +222,7 @@
 	A continuación utilizaremos el comando curl -i -X POST y agregaremos un documento JSON el cual contiene un nuevo Blueprint llamado "themkt4.0" con su autor "Juan" y sus respectivos puntos. 
 	
 	``` java
-	curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints -d "{"""author""":"""juan""","""points""":[{"""x""":10,"""y""":10},{"""x""":15,"""y""":0}],"""name""":"""themkt4.0"""}"
+	curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints -d "{"""author""":"""juan""","""points""":[{"""x""":10,"""y""":10},{"""x""":15,"""y""":0}],"""name""":"""themkt4"""}"
 	```
 - With the above, register a new plane (to 'design' a JSON object, you can use this tool). It can be based on the JSON format shown in the browser when consulting an order with the GET method.
 	
@@ -232,7 +232,7 @@
 	
 - Taking into account the author and name of the registered plan, verify that it can be obtained through a GET request to the corresponding resource /blueprints/{author}/{bpname}.
 
-	![add 1](https://user-images.githubusercontent.com/48154086/74679864-fc657400-518c-11ea-9a25-7760a669c48d.PNG)
+	![Capture](https://user-images.githubusercontent.com/44879884/74683844-24a6a000-5198-11ea-9e72-cabd093e73d7.PNG)
 	
 
 - Add support to the PUT verb for resources of the form /blueprints/{author}/{bpname}, so that it is possible to update a specific plane.
