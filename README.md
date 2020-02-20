@@ -266,3 +266,16 @@
 	
 
 ## PART III
+
+The BlueprintsRESTAPI component will work in a concurrent environment. That is, it will attend multiple requests simultaneously (with the stack of applications used, these requests will be attended by default across multiple threads). Given the above, you should review your API (once it works), and identify:
+
+- What race conditions could occur? 
+
+  Se presenta una condición de carrera en el momento en el que se realiza una consulta sobre la lista de blueprints. 
+ 
+- What are the respective critical regions?
+
+  Se presenta una región crítica en el momento en el que varios clientes pueden estar actualizando el mismo blueprint. 
+
+
+
