@@ -221,9 +221,10 @@
 
 	A continuación utilizaremos el comando curl -i -X POST y agregaremos un documento JSON el cual contiene un nuevo Blueprint llamado "themkt4.0" con su autor "Juan" y sus respectivos puntos. 
 	
-	``` java
+	```
 	curl -i -X POST -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints -d "{"""author""":"""juan""","""points""":[{"""x""":10,"""y""":10},{"""x""":15,"""y""":0}],"""name""":"""themkt4"""}"
 	```
+	
 - With the above, register a new plane (to 'design' a JSON object, you can use this tool). It can be based on the JSON format shown in the browser when consulting an order with the GET method.
 	
 	Al ejecutar el comando anterior se crea un nuevo blueprint con los atributos que se le dieron anteriormente y al realizar la consulta de todos los blueprints, nos da como resultado todos los anteriores junto con el nuevo que se creo de MKT4.0.
@@ -237,6 +238,31 @@
 
 - Add support to the PUT verb for resources of the form /blueprints/{author}/{bpname}, so that it is possible to update a specific plane.
 
-	![Capture2](https://user-images.githubusercontent.com/44879884/74684996-3d648500-519b-11ea-8189-625f0f2dab31.PNG)
+	``` java 
+	    @RequestMapping(method = RequestMethod.PUT, path = "{author}/{name}")
+	    public ResponseEntity<Blueprint> manejadorPutModificaUnBluePrint(@RequestBody Blueprint bp,@PathVariable("author") String author, @PathVariable("name") String bpname) {
+		try {
+		    bps.changeBluerprint(bp, author, bpname);
+		} catch (BlueprintNotFoundException ex) {
+		    Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return new ResponseEntity<>(HttpStatus.CREATED);
+	    }
+	```
+	
+	verificamos los blueprints actuales
+	
+	![Captura](https://user-images.githubusercontent.com/44879884/74892961-1f448380-5359-11ea-9aac-1584d96746d7.PNG)
+	
+	Para probar el Put ejecutamos el siguiente comando, donde vamos a modificar el Blueprint de "sarah llamado thearsw".
+	
+	```
+	curl -i -X PUT -HContent-Type:application/json -HAccept:application/json http://localhost:8080/blueprints/sarah/thearsw -d "{"""author""":"""pipe""","""points""":[{"""x""":140,"""y""":140},{"""x""":115,"""y""":115}],"""name""":"""palito"""}"
+	```
+	
+	verificamos el cambio en los blueprints
+	
+	![dews](https://user-images.githubusercontent.com/44879884/74892960-1eabed00-5359-11ea-9d95-aa73f7309fb5.PNG)
+	
 
 ## PART III
