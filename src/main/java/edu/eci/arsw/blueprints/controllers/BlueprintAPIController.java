@@ -82,7 +82,11 @@ public class BlueprintAPIController {
     
     @RequestMapping(method = RequestMethod.PUT, path = "{author}/{name}")
     public ResponseEntity<Blueprint> manejadorPutModificaUnBluePrint(@RequestBody Blueprint bp,@PathVariable("author") String author, @PathVariable("name") String bpname) {
-        bps.changeBluerprint(bp, author, bpname);
+        try {
+            bps.changeBluerprint(bp, author, bpname);
+        } catch (BlueprintNotFoundException ex) {
+            Logger.getLogger(BlueprintAPIController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

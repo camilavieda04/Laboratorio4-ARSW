@@ -38,8 +38,9 @@ public class BlueprintsServices {
         }
     }
     
-    public void changeBluerprint(Blueprint bp, String author, String name){
-
+    public void changeBluerprint(Blueprint bp, String author, String name) throws BlueprintNotFoundException{
+        bpp.getBlueprint(author, name).setAuthor(bp.getAuthor());
+        bpp.getBlueprint(author, name).setName(bp.getName());
     }
 
     public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
